@@ -22,12 +22,6 @@
 ##   physical constraints (port mapping)   ##
 #############################################
 
-## on-board 100 MHz clock signal
-#set_property -dict {PACKAGE_PIN E3 IOSTANDARD LVCMOS33} [get_ports clk]
-
-## push-button
-#set_property -dict {PACKAGE_PIN D9 IOSTANDARD LVCMOS33} [get_ports rst] ;   ## BTN0
-
 ## slide switches
 set_property -dict { PACKAGE_PIN A8   IOSTANDARD LVCMOS33 } [get_ports A] ;   ## SW0
 set_property -dict { PACKAGE_PIN C11  IOSTANDARD LVCMOS33 } [get_ports B] ;   ## SW1
@@ -58,18 +52,12 @@ set_units -capacitance pF
 #
 set_load 10 [all_outputs] -verbose
 
-## this is a pure combinational block, only constrain a maximum delay of 5 ns between input and output ports
-set_max_delay 5 -from [all_inputs] -to [all_outputs] -verbose
 
 
 ############################
 ##   timing constraints   ##
 ############################
 
-
-## 100 MHz clock
-#create_clock -period 10.000 -name clk100 -waveform {0.000 5.000} -add [get_ports clk]
-
-## input delay for all input signals ref. to master clock (assume approx. 1/2 clock period)
-#set_input_delay 5.0 -clock clk100 [all_inputs]
+## this is a pure combinational block, only constrain a maximum delay of 5 ns between input and output ports
+set_max_delay 5 -from [all_inputs] -to [all_outputs] -verbose
 
