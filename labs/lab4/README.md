@@ -305,7 +305,7 @@ Explore the content of the `scripts/impl/xflow.tcl` script already prepared for 
 
 Modify the VHDL source code `rtl/Gates.vhd` and **instantiate Xilinx FPGA
 primitives** `IBUF` and `OBUF` **input/output buffers** in order to buffer
-all top-level input/output signals `A` and `B` and `Z(5 downto 0)` alredy
+all top-level input/output signals `A` and `B` and `Z(5 downto 0)` already
 at RTL stage.
 
 In order to **elaborate and simulate** the VHDL code instantiating Xilinx FPGA primitives
@@ -415,105 +415,6 @@ Simulate the new code after modifications :
 ```
 % make sim
 ```
-<br/>
-
-# Exercise
-
-Further modify the source code `rtl/Gates.vhd` in order to **register all outputs into a bank of FlipFlops** as follows :
-
-```vhdl
-library ieee ;
-use ieee.std_logic_1164.all ;
-
-
--- library to simulate Xilinx FPGA primitives
-library UNISIM ;
-use UNISIM.vcomponents.all ;
-
-
-entity Gates is
-
-   port (
-      clk : in std_logic ;
-      A   : in  std_logic ;
-      B   : in  std_logic ;
-      Z   : out std_logic_vector(5 downto 0)
-   ) ;
-
-end entity Gates ;
-
-
-architecture rtl of Gates is
-
-   --------------------------
-   --   internal signals   --
-   --------------------------
-
-   signal A_int : std_logic ;
-   signal B_int : std_logic ;
-   signal Z_int : std_logic_vector(5 downto 0) ;
-
-
-   --------------------------------
-   --   components declaration   --
-   --------------------------------
-
-   -- input buffer (assume default generics)
-   component IBUF is
-      port (
-         I : in  std_logic ;
-         O : out std_logic
-      ) ;
-   end component ;
-
-
-   -- output buffer (assume default generics)
-   component OBUF is
-      port (
-         I : in  std_logic ;
-         O : out std_logic
-      ) ;
-   end component ;
-
-
-begin
-
-   -- place buffers on all input signals
-   A_rtlbuf : IBUF port map( I => A, O => A_int ) ;
-   B_rtlbuf : IBUF port map( I => B, O => B_int ) ;
-
-   -- place buffers on all output signals
-   Z0_rtlbuf : OBUF port map( I => Z_int(0), O => Z(0) ) ;
-   Z1_rtlbuf : OBUF port map( I => Z_int(1), O => Z(1) ) ;
-   Z2_rtlbuf : OBUF port map( I => Z_int(2), O => Z(2) ) ;
-   Z3_rtlbuf : OBUF port map( I => Z_int(3), O => Z(3) ) ;
-   Z4_rtlbuf : OBUF port map( I => Z_int(4), O => Z(4) ) ;
-   Z5_rtlbuf : OBUF port map( I => Z_int(5), O => Z(5) ) ;
-
-   -- AND
-   Z_int(0) <= A_int and B_int ;
-
-   -- NAND
-   Z_int(1) <= A_int nand B_int ;
-
-   -- OR
-   Z_int(2) <= A_int or B_int ;
-
-   -- NOR
-   Z_int(3) <= A_int nor B_int ;
-
-   -- XOR
-   Z_int(4) <= A_int xor B_int ;
-
-   -- XNOR
-   Z_int(5) <= A_int xnor B_int ;
-
-end architecture rtl ;
-```
-<br/>
-
- 
-
 
 
 ## Further reading
