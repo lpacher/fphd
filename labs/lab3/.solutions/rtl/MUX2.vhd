@@ -1,8 +1,8 @@
 --
 -- VHDL description of a simple 2:1 multiplexer using different coding styles.
 -- Different architectures are used, one for each proposed implementation.
--- The actual architecture to be simulated is then selected using a 'configuration'
--- statement in the testbench.
+-- The actual architecture to be simulated/implemented is then selected using
+-- a VHDL "component configuration" statement in the testbench/top-level wrapper.
 --
 -- Luca Pacher - pacher@to.ifn.it
 -- Fall 2020
