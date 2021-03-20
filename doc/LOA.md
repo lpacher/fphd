@@ -76,6 +76,8 @@
 
 **BOM** - Bill Of Material
 
+**BPI** - Byte Peripheral Interface (_FPGA parallel NOR flash programming option_)
+
 **BRAM** - Block RAM (Read-Only Memory)
 
 **BSP** - Board Support Package
@@ -167,6 +169,8 @@
 
 **DMA** - Direct Memory Access
 
+**DNA** - unique hardware device identifier for any Xilinx device
+
 **DNL** - Differential Non-Linearity
 
 **DoT** - Digital on Top
@@ -189,6 +193,7 @@
 
 **DUV** - Device Under Verification
 
+**DVI** - Digital Visual Interface
 
 
 
