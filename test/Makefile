@@ -28,12 +28,13 @@ SHELL := bash
 .SHELLFLAGS := -e -u -o pipefail -c
 
 
-#####################
-##   target FPGA   ##
-#####################
+################################################
+##   target FPGA device and external memory   ##
+################################################
 
 ## default: Digilent Arty-7 development board
-part := xc7a35ticsg324-1L
+part  := xc7a35ticsg324-1L
+flash := n25q128-3.3v-spi-x1_x2_x4  
 
 ## export the ID of the target device to all flows
 export XILINX_DEVICE=$(part)
@@ -126,8 +127,10 @@ area :
 	@$(MKDIR) $(RTL_DIR)
 	@$(MKDIR) $(SIM_DIR)
 	@$(MKDIR) $(TCL_DIR)/common
-	@$(MKDIR) $(TCL_DIR)/sim
-	@$(MKDIR) $(TCL_DIR)/impl
+	@$(MKDIR) $(TCL_DIR)/simulation
+	@$(MKDIR) $(TCL_DIR)/implementation
+	@$(MKDIR) $(TCL_DIR)/programming
+	@$(MKDIR) $(TCL_DIR)/debug
 
 	@$(MKDIR) $(BIN_DIR)
 
@@ -148,29 +151,29 @@ area :
 
 ## parse and compile all RTL and simulation sources
 .PHONY : compile
-compile : $(TCL_DIR)/sim/compile.tcl
+compile : $(TCL_DIR)/simulation/compile.tcl
 
 ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
 	@$(error ERROR: Missing simulation working area $(WORK_DIR)/sim ! Run 'make area' before running the flows.)
 else
-	@tclsh $(TCL_DIR)/sim/compile.tcl $@
+	@tclsh $(TCL_DIR)/simulation/compile.tcl $@
 endif
 ##_______________________________________________________________________________________
 
 
 ## elaborate the design
 .PHONY : elaborate
-elaborate : $(TCL_DIR)/sim/elaborate.tcl
+elaborate : $(TCL_DIR)/simulation/elaborate.tcl
 
-	@tclsh $(TCL_DIR)/sim/elaborate.tcl $@
+	@tclsh $(TCL_DIR)/simulation/elaborate.tcl $@
 ##_______________________________________________________________________________________
 
 
 ## run simulation executable
 .PHONY : simulate
-simulate : $(TCL_DIR)/sim/simulate.tcl $(WORK_DIR)/sim/xsim.dir
+simulate : $(TCL_DIR)/simulation/simulate.tcl $(WORK_DIR)/sim/xsim.dir
 
-	@tclsh $(TCL_DIR)/sim/simulate.tcl $@ $(mode)
+	@tclsh $(TCL_DIR)/simulation/simulate.tcl $@ $(mode)
 ##_______________________________________________________________________________________
 
 
@@ -242,18 +245,18 @@ endif
 
 ## run Vivado FPGA implementation flow in non-project mode
 .PHONY : xflow
-xflow : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/xflow.tcl
+xflow : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/implementation/xflow.tcl
  
 ifeq ($(wildcard $(WORK_DIR)/impl/.*),)
 	@$(error ERROR: Missing implementation working area $(WORK_DIR)/impl ! Run 'make area' before running the flows.)
 else
    ifeq ($(mode),gui)
 	@echo "exec vivado -mode gui \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/xflow.tcl \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/implementation/xflow.tcl \
 	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace &" | tclsh
    else
 	@vivado -mode $(mode) \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/xflow.tcl \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/implementation/xflow.tcl \
 	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace
    endif
 endif
@@ -284,25 +287,35 @@ hm : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/common/hm.tcl
 bit :=
 ltx :=
 
-.PHONY : upload
-upload : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/impl/upload.tcl
+.PHONY : install/fpga
+install/fpga : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/programming/upload.tcl
 
 ifeq ($(mode),gui)
 
 	@echo "exec vivado -mode gui \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/upload.tcl \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/programming/upload.tcl \
 	   -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(bit) $(ltx) &" | tclsh
 else
 	@vivado -mode $(mode) \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/impl/upload.tcl \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/programming/upload.tcl \
 	   -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(bit) $(ltx)
 endif
 ##_______________________________________________________________________________________
 
 
-## alias, same as make upload
-.PHONY : install
-install : upload
+.PHONY : install/flash
+install/flash : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/programming/flash.tcl
+
+ifeq ($(mode),gui)
+
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/programming/flash.tcl \
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(bit) $(ltx) &" | tclsh
+else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/programming/flash.tcl \
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal -tclargs $(bit) $(ltx)
+endif
 ##_______________________________________________________________________________________
 
 
@@ -342,24 +355,34 @@ help :
 	@$(ECHO) ""
 	@$(ECHO) "Defaults :\n"
 	@$(ECHO) " - top-level RTL module :  $(dut)"
-	@$(ECHO) " - target device :         $(part)\n\n"
+	@$(ECHO) " - target device :         $(part)"
+	@$(ECHO) " - external memory :       $(flash)\n\n"
 
-	@$(ECHO) "Available targets:"
+	@$(ECHO) "Setup targets:"
 	@$(ECHO) ""
-	@$(ECHO) " - make help        Command-line help"
-	@$(ECHO) " - make area        Creates new fresh working area"
-	@$(ECHO) " - make compile     Parse and compile Verilog sources"
-	@$(ECHO) " - make elaborate   Elaborate design"
-	@$(ECHO) " - make simulate    Run simulation executable"
-	@$(ECHO) " - make sim         Alias, one step compilation, elaboration and simulation"
-	@$(ECHO) " - make project     Creates new fresh project attached to Xilinx device (default: xc7a35ticsg324-1L)"
-	@$(ECHO) " - make restore     Restore Vivado project from XML project file (.xpr) or design checkpoint (.dcp)"
-	@$(ECHO) " - make ip          Customize and compile IP cores for your design"
-	@$(ECHO) " - make xflow       Run Vivado FPGA implementation flow in non-project mode"
-	@$(ECHO) " - make build       Alias, same as make xflow"
-	@$(ECHO) " - make hm          Launch Vivado in GUI mode and open the Hardware Manager"
-	@$(ECHO) " - make upload      Upload bitsream to target FPGA using Hardware Manager"
-	@$(ECHO) " - make install     Alias, same as make upload\n\n"
+	@$(ECHO) " - make help            Command-line help"
+	@$(ECHO) " - make area            Creates new fresh working area\n"
+
+	@$(ECHO) "Simulation targets:"
+	@$(ECHO) ""
+	@$(ECHO) " - make compile         Parse and compile Verilog sources"
+	@$(ECHO) " - make elaborate       Elaborate design"
+	@$(ECHO) " - make simulate        Run simulation executable"
+	@$(ECHO) " - make sim             Alias, one step compilation, elaboration and simulation\n"
+
+	@$(ECHO) "Implementation targets:"
+	@$(ECHO) ""
+	@$(ECHO) " - make project         Creates new fresh project attached to Xilinx device (default: xc7a35ticsg324-1L)"
+	@$(ECHO) " - make restore         Restore Vivado project from XML project file (.xpr) or design checkpoint (.dcp)"
+	@$(ECHO) " - make ip              Customize and compile IP cores for your design"
+	@$(ECHO) " - make xflow           Run Vivado FPGA implementation flow in non-project mode"
+	@$(ECHO) " - make build           Alias, same as make xflow"
+	@$(ECHO) " - make hm              Launch Vivado in GUI mode and open the Hardware Manager\n"
+
+	@$(ECHO) "Programming targets:"
+	@$(ECHO) ""
+	@$(ECHO) " - make install/fpga    Upload bitsream to target FPGA using Hardware Manager"
+	@$(ECHO) " - make install/flash   Upload bitsream to external memory using Hardware Manager\n"
 
 	@$(ECHO) "Cleanup targets:"
 	@$(ECHO) ""
@@ -369,3 +392,4 @@ help :
 	@$(ECHO) " - make clean/all   Delete all log files and temporary files"
 	@$(ECHO) " - make clean       Alias, same as make clean/all\n"
 ##_______________________________________________________________________________________
+
