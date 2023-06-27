@@ -6,7 +6,7 @@
 
 <br />
 
-Git repository for the [_Introduction to FPGA Programming Using Xilinx Vivado and VHDL_](https://www.phdphysics.unito.it/do/corsi.pl/Show?_id=45hr) (3 CFU)
+Git repository for the [_Introduction to FPGA Programming Using Xilinx Vivado and VHDL_](https://www.phdphysics.unito.it/do/corsi.pl/Show?_id=45hr) (4 CFU)
 PhD course at University of Torino, Physics Department.
 
 <br />
@@ -568,8 +568,8 @@ can be found [**here**](doc/LOA.md).
 # Webex lectures
 [**[Contents]**](#contents)
 
-In order to maximize the participation all lectures will be held **remotely** using the [**WebEx UniTO**](https://www.unito.it/node/2373) platform.<br/>
-All lectures will be also **video-recorded**.
+In order to maximize the participation all lectures will be held **remotely** using the [**WebEx UniTO**](https://www.unito.it/node/2373) platform.
+All lectures will be also **video-recorded**.<br />
 
 The virtual room to attend the lectures is accessible at the following link:
 
