@@ -1,0 +1,29 @@
+##########################################################################
+##   .gitignore file for files and directories at the top of the repo   ##
+##########################################################################
+
+## vim .swp files
+*.swp
+*.swo
+
+## Gedit/Nedit temporary files
+*~
+
+## log files
+*.log
+log*
+
+## temporary directory (optional)
+tmp/*
+temp/*
+
+## test directory content
+test/*
+
+## all students stuffs (use git add -f to add .solutions/ instead)
+fpga/test/*
+fpga/labs/*
+fpga/practicum/*
+fpga/projects/*
+
+## add here further directives if required ...
