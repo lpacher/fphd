@@ -397,7 +397,7 @@ Step-by-step instructions explaining how to run this test flow can be found [**h
 
 <p>
 
-* B. Mealy and F. Tappero, [_Free Range VHDL_](http://freerangefactory.org/pdf/df344hdh4h8kjfh3500ft2/free_range_vhdl.pdf) (open source)
+* B. Mealy and F. Tappero, [_Free Range VHDL_](https://github.com/fabriziotappero/Free-Range-VHDL-book/blob/master/free_range_vhdl.pdf) (open source)
 * C.H. Roth Jr, _Digital Systems Design Using VHDL_
 * V.A. Pedroni, _Circuit Design with VHDL_
 * R.E. Haskell and D.M. Hanna, _Introduction to Digital Design Using Digilent FPGA Boards / VHDL Examples_

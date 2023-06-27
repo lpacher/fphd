@@ -1393,7 +1393,7 @@ Feel free to use a different target directory. As an example:
 
 ```
 % cd Desktop/Documents
-% git clone https://github.com/lpacher/fphd.git LAE
+% git clone https://github.com/lpacher/fphd.git FPGA
 ```
 
 <br />
