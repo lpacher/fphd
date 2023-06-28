@@ -577,7 +577,7 @@ The virtual room to attend the lectures is accessible at the following link:
 
 <br/>
 
-### Links to **video-recorded lectures** (in Italian)
+### Links to **video-recorded lectures** (in English)
 
 The complete list of past video-recorded lectures can be accessed [**here**](doc/webex/README.md).
 
