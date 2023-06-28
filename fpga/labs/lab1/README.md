@@ -28,6 +28,12 @@
 In the first lab we will implement and simulate a simple **NOT-gate (inverter)** using the **VHDL Hardware Description Language (HDL)** <br />
 and the **XSim simulator** that comes with the **Xilinx Vivado design suite**.<br/>
 
+<br />
+
+<img src="doc/pictures/Inverter.png" alt="drawing" width="500"/>
+
+<br />
+
 We will also learn how to write a [**GNU Makefile**](https://www.gnu.org/software/make/manual/make.html)
 to **automate the simulation flow** at the command line.
 
@@ -1310,6 +1316,10 @@ Create a new source file `BufferTri.vhd` and try yourself to implement a **three
 ```vhdl
 ZT <= X when OE = '1' else 'Z' ;
 ```
+
+<br />
+
+<img src="doc/pictures/BufferTri.png" alt="drawing" width="500"/>
 
 <br />
 
