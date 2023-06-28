@@ -1308,7 +1308,7 @@ Create a new source file `BufferTri.vhd` and try yourself to implement a **three
 **conditional assignment** and an active-high output-enable `OE` control port:
 
 ```vhdl
-Z <= X when OE = '1' else 'Z' ;
+ZT <= X when OE = '1' else 'Z' ;
 ```
 
 <br />
