@@ -11,3 +11,8 @@ https://github.com/lpacher/fphd/tree/master/fpga/labs/lab0)
 [Simulate a simple inverter in VHDL](
 https://github.com/lpacher/fphd/tree/master/fpga/labs/lab1)
 
+* **Lab 2**<br/>
+[Fundamental logic gates](
+https://github.com/lpacher/fphd/tree/master/fpga/labs/lab2)
+
+

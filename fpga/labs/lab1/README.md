@@ -30,7 +30,7 @@ and the **XSim simulator** that comes with the **Xilinx Vivado design suite**.<b
 
 <br />
 
-<img src="doc/pictures/Inverter.png" alt="drawing" width="500"/>
+<img src="doc/pictures/Inverter.png" alt="drawing" width="800"/>
 
 <br />
 
@@ -1303,6 +1303,10 @@ ZN <= '1' when X = '0' else '0' ;
 
 <br />
 
+<img src="doc/pictures/InverterAsMux.png" alt="drawing" width="500"/>
+
+<br />
+
 Save the file once done. Re-compile and re-simulate the code.
 Verify if the functionality of the NOT gate has changed.
 
@@ -1319,7 +1323,7 @@ ZT <= X when OE = '1' else 'Z' ;
 
 <br />
 
-<img src="doc/pictures/BufferTri.png" alt="drawing" width="500"/>
+<img src="doc/pictures/BufferTri.png" alt="drawing" width="800"/>
 
 <br />
 
