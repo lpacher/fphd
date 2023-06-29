@@ -584,8 +584,9 @@ The complete list of past video-recorded lectures can be accessed [**here**](doc
 * Lecture 1<br />
 _<https://unito.webex.com/webappng/sites/unito/recording/play/f5510ecef7c0103bafec5ed50d23eeac>_
 
+* Lecture 2<br />
+_<https://unito.webex.com/webappng/sites/unito/recording/play/48a338f0f88a103bbf7cd620c2ef7930>_
 
-* Lecture 2
 * Lecture 3
 * Lecture 4
 * Lecture 5
