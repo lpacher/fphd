@@ -27,12 +27,16 @@ architecture rtl of Inverter is
 begin
 
    -- signal assignment
-   --ZN <= not X ;
-   ZN <= not X after 3 ns ;   -- include 3ns propagation delay between input and output
+   ZN <= not X ;
+   --ZN <= not X after 3 ns ;   -- include 3ns propagation delay between input and output
 
 
    -- conditional signal assignment (MUX-style)
-   --ZN <= '1' when X = '0' else '0' ;
+   --ZN <= '1' when X = '0' else '0' ;              -- with this code not all possible input combinations are covered
+   --
+   --ZN <= '1' when X = '0' else                    -- better implementation that covers all possible input combinations
+   --      '0' when X = '1' else
+   --      'X'   -- catch-all
 
 end architecture rtl ;
 
