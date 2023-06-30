@@ -83,7 +83,7 @@ List the content of the directory:
 >
 > **QUESTION**
 >
-> Why the outputs of the above commands are not the same ? <br /><br />
+> Why the outputs of the above commands are not the same? <br /><br />
 >
 >   \____________________________________________________________________________________________________
 >
@@ -1309,6 +1309,17 @@ ZN <= '1' when X = '0' else '0' ;
 
 Save the file once done. Re-compile and re-simulate the code.
 Verify if the functionality of the NOT gate has changed.
+
+<br />
+
+>
+> **QUESTION**
+>
+> Which is the logic value of the `ZN` output when the input signal is uninitialized at the beginning of the simulation?<br />
+> Is this behaviour expected? <br /><br />
+>
+>   \____________________________________________________________________________________________________
+>
 
 <br />
 
