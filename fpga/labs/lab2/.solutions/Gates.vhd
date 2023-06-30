@@ -43,19 +43,19 @@ begin
    Z(0) <= A and B ;
 
    -- NAND
-   Z(1) <= A nand B ;
+   Z(1) <= A nand B ;      -- same as Z(1) <= not (A and B)
 
    -- OR
    Z(2) <= A or B ;
 
    -- NOR
-   Z(3) <= A nor B ;
+   Z(3) <= A nor B ;       -- same as Z(3) <= not (A or B)
 
    -- XOR
    Z(4) <= A xor B ;
 
    -- XNOR
-   Z(5) <= A xnor B ;
+   Z(5) <= A xnor B ;      -- same as Z(5) <= not (A xor B)
 
 end architecture rtl ;
 
