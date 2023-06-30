@@ -582,12 +582,15 @@ The virtual room to attend the lectures is accessible at the following link:
 The complete list of past video-recorded lectures can be accessed [**here**](doc/webex/README.md).
 
 * Lecture 1<br />
-_<https://unito.webex.com/webappng/sites/unito/recording/play/f5510ecef7c0103bafec5ed50d23eeac>_
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/f5510ecef7c0103bafec5ed50d23eeac>_
 
 * Lecture 2<br />
-_<https://unito.webex.com/webappng/sites/unito/recording/play/48a338f0f88a103bbf7cd620c2ef7930>_
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/48a338f0f88a103bbf7cd620c2ef7930>_
 
 * Lecture 3
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/3712f84df953103bb9fb6a1108ce59c9>_
+
+
 * Lecture 4
 * Lecture 5
 * Lecture 6
