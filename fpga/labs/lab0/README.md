@@ -2550,6 +2550,30 @@ Compile and elaborate the example HDL design and run the resulting simulation ex
 % make elaborate
 % make simulate
 ```
+<br />
+
+>
+> **IMPORTANT**
+>
+> Students working with **Linux Ubuntu** reported that by default `make elaborate` fails with the following error:
+>
+> ```
+> ERROR: [XSIM 43-3409] Failed to compile generated C file xsim.dir/tb_Counter/obj/xsim_1.c.
+> ERROR: [XSIM 43-3915] Encountered a fatal error. Cannot continue.
+> Exiting...
+> ```
+>
+> The source of the error is due to **missing dependencies** installed on the system.
+> In particular the `clang` compiler that comes with the Vivado installation requires `libncurses.so`
+> which might be not installed. This can be easily solved by installing the following packages:
+>
+> ```
+> sudo apt-get install libncurses5 libtinfo5
+> ```
+> <br />
+>
+> Ref. also to: _<https://support.xilinx.com/s/question/0D52E00006iHlpQSAS/vivado-20172-simulation-xsim-433409-failed-to-compile-generated-c-file?language=en_US>_
+>
 
 <br />
 

@@ -120,7 +120,7 @@ List all available `Makefile` targets with:
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > Each target in the `Makefile` is actually executed invoking a `bash` shell. Windows users might notice that
 > a strange warning is generated when executing `make` targets:
@@ -204,6 +204,30 @@ Compile and elaborate the example HDL design and run the resulting simulation ex
 % make elaborate
 % make simulate
 ```
+<br />
+
+>
+> **IMPORTANT**
+>
+> Students working with **Linux Ubuntu** reported that by default `make elaborate` fails with the following error:
+>
+> ```
+> ERROR: [XSIM 43-3409] Failed to compile generated C file xsim.dir/tb_Counter/obj/xsim_1.c.
+> ERROR: [XSIM 43-3915] Encountered a fatal error. Cannot continue.
+> Exiting...
+> ```
+>
+> The source of the error is due to **missing dependencies** installed on the system.
+> In particular the `clang` compiler that comes with the Vivado installation requires `libncurses.so`
+> which might be not installed. This can be easily solved by installing the following packages:
+>
+> ```
+> sudo apt-get install libncurses5 libtinfo5
+> ```
+> <br />
+>
+> Ref. also to: _<https://support.xilinx.com/s/question/0D52E00006iHlpQSAS/vivado-20172-simulation-xsim-433409-failed-to-compile-generated-c-file?language=en_US>_
+>
 
 <br />
 
@@ -329,7 +353,7 @@ program the FPGA or to write the firmware into the external 128-MB Quad SPI Flas
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > The following instructions are provided **only for reference**, you can test firmware installation flows
 > only if you have a Digilent Arty A7 board attached to your personal computer!
