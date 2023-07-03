@@ -587,11 +587,12 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/f5510ecef7
 * Lecture 2<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/48a338f0f88a103bbf7cd620c2ef7930>_
 
-* Lecture 3
+* Lecture 3<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/3712f84df953103bb9fb6a1108ce59c9>_
 
+* Lecture 4<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/00f87711fbaf103bb95f6a1108ce59c9>_
 
-* Lecture 4
 * Lecture 5
 * Lecture 6
 * Lecture 7

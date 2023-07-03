@@ -5,7 +5,7 @@
 ## Spring 2023
 ##
 
-## list of Verilog sources to be compiled
+## list of VHDL sources to be compiled
 SOURCES := Gates.vhd tb_Gates.vhd
 
 
@@ -18,9 +18,9 @@ RM    := rm -f -v
 RMDIR := rm -rf -v
 
 
-## compile Verilog sources (xvlog)
+## compile VHDL sources (xvhdl)
 compile : $(SOURCES)
-	@xvlog $(SOURCES) -log $@.log
+	@xvhdl $(SOURCES) -log $@.log
 
 
 ## elaborate the design (xelab)
