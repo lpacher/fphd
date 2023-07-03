@@ -104,7 +104,7 @@ begin
    ---------------------------------
 
    DUT : MUX2 port map (A => count(0), B => count(1), S => sel, Z => Z) ;
-   --DUT : MUX2 port map ( A => '1', B => '1', S => select, Z => Z) ;
+   --DUT : MUX2 port map ( A => '1', B => '1', S => sel, Z => Z) ;
 
    -----------------------
    --   main stimulus   --

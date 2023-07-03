@@ -734,7 +734,7 @@ Save all modifications and re-simulate the design from scratch:
 <br />
 
 Debug simulation results by looking at waveforms. You should be able to confirm that **glitches** in form of **static-one timing hazards**
-appear on the MUX output whenever the selection control changes from high to low, while the timing hazard is not present for the low-to-high
+appears on the MUX output whenever the selection control changes from high to low, while the timing hazard is not present for the low-to-high
 transition.
 
 

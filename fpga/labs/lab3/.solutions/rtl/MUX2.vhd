@@ -125,6 +125,7 @@ architecture logic_equation of MUX2 is
    signal Sbar : std_logic ;    -- not S
    signal w1   : std_logic ;    -- A and Sbar
    signal w2   : std_logic ;    -- B and S
+   --signal w3   : std_logic ;
 
 begin
 
@@ -138,9 +139,10 @@ begin
 
    w1 <= A and Sbar after 1ns ;
    w2 <= B and S    after 1ns ;
-   w3 <= A and B    after 1ns ;
+   --w3 <= A and B    after 1ns ;   -- fix timing hazard
 
    Z  <= w1 or w2 after 1ns ;
+   --Z <= w1 or w2 or w3 after 1ns ;
 
 end architecture logic_equation ;
 
