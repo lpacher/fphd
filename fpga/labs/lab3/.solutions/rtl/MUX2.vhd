@@ -25,13 +25,11 @@ entity MUX2 is
 end entity MUX2 ;
 
 
+---------------------------------
+--   if/else behavioral code   --
+---------------------------------
 architecture if_else of MUX2 is
-
 begin
-
-   ---------------------------------
-   --   if/else behavioral code   --
-   ---------------------------------
 
    --process(all)    -- VHDL-2008 only feature
    process(A,B,S)  -- **IMPORTANT: this is a COMBINATIONAL block, all signals contribute to the SENSITIVITY LIST
@@ -43,17 +41,29 @@ begin
       end if ;
    end process ;
 
+--
+--   process(A,B,S)
+--   begin
+--      if(S = '0') then
+--         Z <= A ;
+--      elsif(S = '1') then
+--         Z <= B ;
+--      else
+--         Z <= 'X'
+--      end if ;
+--   end process ;
+--
+
 end architecture if_else ;
 -----------------------------------------------------------------
 
 
+------------------------------------------
+--   when/else conditional assignment   --
+------------------------------------------
 architecture when_else of MUX2 is
-
 begin
 
-   ------------------------------------------
-   --   when/else conditional assignment   --
-   ------------------------------------------
 
    Z <= A  when S = '0' else
         B  when S = '1' else
@@ -63,42 +73,37 @@ end architecture when_else ;
 -----------------------------------------------------------------
 
 
+--------------------------------------------
+--   with/select conditional assignment   --
+--------------------------------------------
 architecture with_select of MUX2 is
-
 begin
-
-   --------------------------------------------
-   --   with/select conditional assignment   --
-   --------------------------------------------
 
    with S select
 
-      Z <= A when '0',
-           B when '1',
+      Z <= A when '0' ,
+           B when '1' ,
            'X' when others ;   -- catch-all
 
 end architecture with_select ;
 -----------------------------------------------------------------
 
 
+--------------------------------------
+--   truth table (case statement)   --
+--------------------------------------
 architecture truth_table of MUX2 is
 
-   signal SAB : std_logic_vector(2 downto 0) ;
-
+   signal code : std_logic_vector(2 downto 0) ;
 
 begin
 
-   SAB <= S & A & B ;   -- concatenation
+   code <= S & A & B ;   -- concatenation
 
-
-   --------------------------------------
-   --   truth table (case statement)   --
-   --------------------------------------
-
-   process(A,B,S)
+   process(A.B,S)
    begin
 
-      case( SAB ) is
+      case( code ) is
 
          when "000" => Z <= '0' ;   -- A
          when "001" => Z <= '0' ;   -- A
@@ -115,10 +120,27 @@ begin
       end case ;
    end process ;
 
+--
+--   with code select
+--
+--      Z <= '0' when "000" ,
+--           '0' when "001" ,
+--           '1' when "010" ,
+--           '1' when "011" ,
+--           '0' when "100" ,
+--           '1' when "101" ,
+--           '0' when "110" ,
+--           '1' when "111" ,
+--           'X' when others ;   -- catch-all
+--
+
 end architecture truth_table ;
 -----------------------------------------------------------------
 
 
+------------------------
+--   logic equation   --
+------------------------
 architecture logic_equation of MUX2 is
 
    -- internal signals
@@ -129,20 +151,16 @@ architecture logic_equation of MUX2 is
 
 begin
 
-   ------------------------
-   --   logic equation   --
-   ------------------------
-
    --Z <= (A and (not S)) or (B and S) ;
 
    Sbar <= not S after 1ns ;
 
    w1 <= A and Sbar after 1ns ;
    w2 <= B and S    after 1ns ;
-   --w3 <= A and B    after 1ns ;   -- fix timing hazard
+   --w3 <= A and B    after 1ns ;   -- fix static-1 timing hazard
 
    Z  <= w1 or w2 after 1ns ;
-   --Z <= w1 or w2 or w3 after 1ns ;
+   --Z <= w1 or w2 or w3 after 1ns ;   -- fix static-1 timing hazard
 
 end architecture logic_equation ;
-
+-----------------------------------------------------------------

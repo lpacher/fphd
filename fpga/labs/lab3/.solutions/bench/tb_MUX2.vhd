@@ -9,7 +9,7 @@
 
 library IEEE ;
 use IEEE.std_logic_1164.all ;
-use IEEE.std_logic_unsigned.all ;   -- to use + operator between std_logic_vector ata type
+use IEEE.std_logic_unsigned.all ;   -- to use + operator between std_logic_vector data type
 
 library STD ;
 use STD.env.all ;                   -- the VHDL2008 revision provides stop/finish functions similar to Verilog to end the simulation
