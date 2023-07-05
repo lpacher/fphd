@@ -596,7 +596,9 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/00f87711fb
 * Lecture 5<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/0431b746fc78103bbff7ae3bcd3007a7>_
 
-* Lecture 6
+* Lecture 6<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/2dfffb53fd41103ba7ff7a88bbff909e>_
+
 * Lecture 7
 * Lecture 8
 
