@@ -99,9 +99,10 @@ architecture structural of TFF is
 
 begin
 
-   ff : DFF ( clk => clk, rst => rst, D => Dint, Q => Qint, Qbar => open ) ;    -- use the 'open' clause to leave output ports unconnected
+   ff : DFF port map ( clk => clk, rst => rst, D => Dint, Q => Qint, Qbar => open ) ;    -- use the 'open' clause to leave output ports unconnected
 
    Dint <= T xor Qint ;
+   Q <= Qint ;
 
 end architecture structural ;
 
@@ -111,15 +112,22 @@ end architecture structural ;
 -----------------------------------
 architecture behavioral of TFF is
 
+   signal Dint : std_logic ;
    signal Qint : std_logic ;
 
 begin
+
+   Dint <= T xor Qint ;
 
    -- SYNCHRONOUS reset
    process(clk)
    begin
       if( rising_edge(clk) ) then
-         Qint <= T xor Qint ; 
+         if( rst = '1' ) then
+            Qint <= '0' ;
+         else
+            Qint <= Dint ;
+         end if ;
       end if ;
    end process ;
 
@@ -129,7 +137,7 @@ begin
    --   if( rst = '1' ) then
    --      Qint <= '0' ;
    --   else
-   --      Qint <= T xor Qint ;
+   --      Qint <= Dint ;
    --end process ;
 
    Q <= Qint ;
@@ -207,7 +215,7 @@ architecture structural of SyncCounter4b is
       port (
          clk  : in  std_logic ;
          rst  : in  std_logic ;
-         D    : in  std_logic ;
+         T    : in  std_logic ;
          Q    : out std_logic
       ) ;
    end component TFF ;
@@ -216,6 +224,15 @@ architecture structural of SyncCounter4b is
    signal Tint : std_logic_vector(3 downto 0) ;
    signal Qint : std_logic_vector(3 downto 0) ;
 
+
+   ---------------------------------
+   --   component configuration   --
+   ---------------------------------
+
+   -- Ref also to: https://docs.xilinx.com/r/en-US/ug901-vivado-synthesis/VHDL-Component-Configuration
+   for all : TFF use entity work.TFF(structural) ;      -- choose here which TFF architecture to simulate
+   --for all : TFF use entity work.TFF(behavioral) ;
+
 begin
 
    Tint(0) <= en ;
@@ -223,10 +240,10 @@ begin
    Tint(2) <= Qint(1) and Tint(1) ;
    Tint(3) <= Qint(2) and Tint(2) ;
 
-   ff_0 TFF port map ( clk => clk, rst => rst, T => Tint[0], Q => Qint(0) ) ;
-   ff_1 TFF port map ( clk => clk, rst => rst, T => Tint[1], Q => Qint(1) ) ;
-   ff_2 TFF port map ( clk => clk, rst => rst, T => Tint[2], Q => Qint(2) ) ;
-   ff_3 TFF port map ( clk => clk, rst => rst, T => Tint[3], Q => Qint(3) ) ;
+   ff_0 : TFF port map ( clk => clk, rst => rst, T => Tint(0), Q => Qint(0) ) ;
+   ff_1 : TFF port map ( clk => clk, rst => rst, T => Tint(1), Q => Qint(1) ) ;
+   ff_2 : TFF port map ( clk => clk, rst => rst, T => Tint(2), Q => Qint(2) ) ;
+   ff_3 : TFF port map ( clk => clk, rst => rst, T => Tint(3), Q => Qint(3) ) ;
 
    Q <= Qint ;
 
@@ -256,6 +273,7 @@ begin
             count <= count + 1 ;    -- **NOTE: be aware of the usage of + 1 and not + '1'
 
          -- else ? Keep memory ! Same as else count <= count ; end if ;
+         end if ;
       end if ;
    end process ;
 

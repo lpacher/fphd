@@ -29,27 +29,31 @@ architecture behavioral of DFF is
 
 begin
 
-   -- FlipFlop with SYNCHRONOUS reset
-   process(clk)
+   -- ASYNCHRONOUS reset
+   process(clk,rst)
    begin
-      if( rising_edge(clk) ) then   -- use the rising_edge(clk) function in place of the verbose clk'event and clk = '1' syntax
-         if( rst = '1') then
-            Qint <= '0' ;
-         else
-            Qint <= D ;
-         end if ;
+      if( rst = '1' ) then
+         Qint <= '0' ;
+      elsif ( rising_edge(clk) ) then -- use the rising_edge(clk) function in place of the verbose clk'event and clk = '1' syntax
+         Qint <= D ;
       end if ;
    end process ;
 
-   -- FlipFlop with ASYNCHRONOUS reset
-   --process(clk,rst)
+   --
+   -- EXERCISE: simulate the same design with SYNCHRONOUS reset FlipFlops. What happens ?
+   --
+   --process(clk)
    --begin
-   --   if( rst = '1' ) then
-   --      Qint <= '0' ;
-   --   elsif ( rising_edge(clk) ) then
-   --      Qint <= D ;
+   --   if( rising_edge(clk) ) then
+   --      if( rst = '1') then
+   --         Qint <= '0' ;
+   --      else
+   --         Qint <= D ;
+   --      end if ;
    --   end if ;
    --end process ;
+
+
 
    -- non inverted output
    Q <= Qint ;
@@ -67,9 +71,10 @@ use IEEE.std_logic_1164.all ;
 
 entity RippleCounter4b is
 
-   input  wire clk, rst,
-   output wire [3:0] Q
-
+   port (
+      clk : in  std_logic ;
+      rst : in  std_logic ;
+      Q   : out std_logic_vector(3 downto 0)
    ) ;
 
 end entity RippleCounter4b ;

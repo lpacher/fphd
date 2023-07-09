@@ -62,9 +62,9 @@ set RTL_TOP_MODULE ${::env(RTL_TOP_MODULE)} ; puts "\n**INFO: Top-level RTL modu
 ##
 set vlogSources {}
 
-if { [info exists ::env(VLOG_SOURCES)] } {
+if { [info exists ::env(RTL_VLOG_SOURCES)] } {
 
-   foreach src [split $::env(VLOG_SOURCES) " "] {
+   foreach src [split $::env(RTL_VLOG_SOURCES) " "] {
 
       lappend vlogSources [file normalize ${src} ]
    }
@@ -75,9 +75,9 @@ if { [info exists ::env(VLOG_SOURCES)] } {
 ##
 set vhdlSources {}
 
-if { [info exists ::env(VHDL_SOURCES)] } {
+if { [info exists ::env(RTL_VHDL_SOURCES)] } {
 
-   foreach src [split $::env(VHDL_SOURCES) " "] {
+   foreach src [split $::env(RTL_VHDL_SOURCES) " "] {
 
       lappend vhdlSources [file normalize ${src} ]
    }

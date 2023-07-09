@@ -74,14 +74,11 @@ LOG_DIR  := log
 ##########################################
 
 ## specify top-level RTL (this is used for implementation and firmware installation)
-#RTL_TOP_MODULE := DLATCH
-RTL_TOP_MODULE := DFF
 #RTL_TOP_MODULE := RippleCounter4b
 #RTL_TOP_MODULE := SyncCounter4b
 
 ## specify top-level testbench module (this is the target module for the xelab executable)
-#SIM_TOP_MODULE := tb_DLATCH
-SIM_TOP_MODULE := tb_DFF
+SIM_TOP_MODULE := tb_sequential
 #SIM_TOP_MODULE := tb_RippleCounter4b
 #SIM_TOP_MODULE := tb_SyncCounter4b
 
@@ -103,9 +100,9 @@ RTL_VHDL_SOURCES := $(RTL_DIR)/DLATCH.vhd $(RTL_DIR)/DFF.vhd
 #RTL_VHDL_SOURCES := $(RTL_DIR)/RippleCounter4b.vhd
 #RTL_VHDL_SOURCES := $(RTL_DIR)/SyncCounter4b.vhd
 
-SIM_VHDL_SOURCES := $(SIM_DIR)/ClockGen.vhd $(SIM_DIR)/tb_DFF.vhd
-SIM_VHDL_SOURCES := $(SIM_DIR)/ClockGen.vhd $(SIM_DIR)/tb_RippleCounter4b.vhd
-SIM_VHDL_SOURCES := $(SIM_DIR)/ClockGen.vhd $(SIM_DIR)/tb_SyncCounter4b.vhd
+SIM_VHDL_SOURCES := $(SIM_DIR)/ClockGen.vhd $(SIM_DIR)/tb_sequential.vhd
+#SIM_VHDL_SOURCES := $(SIM_DIR)/ClockGen.vhd $(SIM_DIR)/tb_RippleCounter4b.vhd
+#SIM_VHDL_SOURCES := $(SIM_DIR)/ClockGen.vhd $(SIM_DIR)/tb_SyncCounter4b.vhd
 
 ## if no Verilog sources, you can either comment the below variables or just leave them empty
 RTL_VLOG_SOURCES :=
@@ -248,9 +245,17 @@ export QFLASH_MEMORY=$(flash)
 ## export the chosen working directory to all flows
 export WORK_DIR
 
-## export HDL variables to xvlog/xvhdl/xelab flows
+## export HDL variables to xvlog/xvhdl/xelab and build flows
 export RTL_TOP_MODULE
 export SIM_TOP_MODULE
+
+ifneq ($(strip $(RTL_VLOG_SOURCES)),)
+   export RTL_VLOG_SOURCES
+endif
+
+ifneq ($(strip $(RTL_VHDL_SOURCES)),)
+   export RTL_VHDL_SOURCES
+endif
 
 ifneq ($(strip $(VLOG_SOURCES)),)
    export VLOG_SOURCES
