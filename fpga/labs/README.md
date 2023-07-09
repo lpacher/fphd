@@ -23,4 +23,8 @@ https://github.com/lpacher/fphd/tree/master/fpga/labs/lab3)
 [The Xilinx Vivado FPGA implementation flow on a simple RTL design.](
 https://github.com/lpacher/fphd/tree/master/fpga/labs/lab5)
 
+* **Lab 6**<br />
+[Introduction to sequential circuits: D-latch and D-FlipFlop in Verilog. Synchronous vs asynchronous reset.<br />
+Implementation of 4-bit asynchronous and synchronous counters using structural code. Behavioral implementation.](
+https://github.com/lpacher/fphd/tree/master/fpga/labs/lab6)
 

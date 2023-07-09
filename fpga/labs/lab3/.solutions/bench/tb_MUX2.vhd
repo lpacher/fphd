@@ -7,6 +7,48 @@
 -- Fall 2020
 --
 
+--
+-- **IMPORTANT !
+--
+-- By default VHDL provides the + (plus) operator to perform basic additions between
+-- software-like NUMBERS (e.g. 32-bit "integer" data type, but also "natural"
+-- or "positive", as well as "real" numbers).
+-- Due to VHDL strong data typing the usage of + between "hardware signals" (buses)
+-- requires the OVERLOADING of the + operator.
+--
+-- As an example, a very simple
+--
+--    count <= count + 1 ;
+--
+-- is NOT allowed in VHDL if count has been declared as std_logic_vector.
+--
+-- In order to perform + between "hardware signals", the "legacy" VHDL introduced
+-- new "vector" data types called "std_logic_signed" and "std_logic_usigned" that
+-- are defined as part of IEEE.std_logic_unsigned and IEEE.std_logic_unsigned packages.
+--
+-- By including these packages in the preamble of the VHDL code one can declare counters
+-- as std_logic_vector and the following syntax (note the usage of single quotes)
+--
+--    count <= count + '1' ;
+--
+-- properly compiles. HOWEVER, in practice the usage of these packages has been
+-- de facto **DEPRACTED** for the following reasons :
+--
+--   1. despite the library name "IEEE" these packages are **NOT** provided
+--      by IEEE, but are Synopsys proprietary !
+--
+--   2. despite the string "std" in (Synopsys) package names they are **NOT**
+--      IEEE standard at all !
+--
+-- This is the reason for which the **RECOMMENDED** package to be used when dealing
+-- with counters is IEEE.numeric_std that introduces new VHDL data types SIGNED and
+-- UNSIGNED along with IEEE-standard definitions to overload fundamental arithmetic
+-- operators such as + and - that are extensively used to generate real hardware.
+--
+-- For this simple testbench we still demonstrate the usage of IEEE.std_logic_unsigned
+-- while later in the course IEEE.numeric_std will be adopted.
+--
+
 library IEEE ;
 use IEEE.std_logic_1164.all ;
 use IEEE.std_logic_unsigned.all ;   -- to use + operator between std_logic_vector data type
