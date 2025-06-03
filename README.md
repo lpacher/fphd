@@ -6,7 +6,7 @@
 
 <br />
 
-Git repository for the [_Introduction to FPGA Programming Using Xilinx Vivado and VHDL_](https://www.phdphysics.unito.it/do/corsi.pl/Show?_id=45hr) (4 CFU)
+Git repository for the [_Introduction to FPGA Programming Using Xilinx Vivado and VHDL_](https://www.phdphysics.unito.it/do/corsi.pl/Show?_id=4uun) (4 CFU)
 PhD course at University of Torino, Physics Department.
 
 <br />
