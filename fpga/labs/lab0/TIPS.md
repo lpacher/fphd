@@ -79,7 +79,7 @@ To open the browser in the current working directory using `start` simply type:
 Example:
 
 ```
-% cd Desktop\fphd
+% cd Desktop\lae
 % start .
 ```
 

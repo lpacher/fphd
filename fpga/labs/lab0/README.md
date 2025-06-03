@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Setting up the Xilinx Vivado development environment <br /> for Linux/Windows operating systems
 [[**Home**](../../../README.md)] [[**Back**](../README.md)] [[**Tips&Tricks**]](TIPS.md) [[**KPAS**]](KPAS.md)
@@ -19,7 +20,9 @@
    * [Add a login script for the Command Prompt](#add-a-login-script-for-the-command-prompt)
    * [Add Notepad++ executable to search path](#add-notepad-executable-to-search-path)
    * [Add Linux executables to search path](#add-linux-executables-to-search-path)
-   * [Install Nano and Vim command-line text editors](#install-nano-and-vim-command-line-text-editors)
+* [**Install Nano and Vim command-line text editors**](#install-nano-and-vim-command-line-text-editors)
+   * [Linux installation](#install-nano-and-vim-linux-installation)
+   * [Windows installation](#install-nano-and-vim-windows-installation)
 * [**Install Git**](#install-git)
    * [Linux installation](#install-git-linux-installation)
    * [Windows installation](#install-git-windows-installation)
@@ -32,6 +35,7 @@
    * [Linux installation](#install-tcl-linux-installation)
    * [Windows installation](#install-tcl-windows-installation)
    * [tclsh init script](#tclsh-init-script)
+* [**Install ROOT and PyROOT**](#install-root-and-pyroot)
 * [**Install PuTTY**](#install-putty)
    * [Linux installation](#install-putty-linux-installation)
    * [Windows installation](#install-putty-windows-installation)
@@ -70,12 +74,13 @@ using a dual-boot or a virtualization software (VirtualBox is fine)
 or find another computer running a Linux distribution or Windows 7/10.
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
-> Most of screenshots included in this guide are mainly from a _Windows 7_ operating system. 
-> Small differences can arise from Windows 7 and Windows 10 or Windows 11.
-> Additionally, screenshots referring to Xilinx Vivado installation steps are from a **2019.2 installer**. The content of the wizard for
-> the latest version available for download on the Xilinx website can be slightly different.
+> Most of screenshots included in this guide are mainly from a _Windows 7 Ultimate_ operating system. 
+> Small differences can arise from Windows 7 and new versions Windows 10 and Windows 11.
+> Additionally, screenshots referring Xilinx Vivado installation steps are from a **2019.2 installer**.
+> The content of the wizard for the latest version available for download on the Xilinx website can be
+> slightly different.
 >
 
 <br />
@@ -100,14 +105,16 @@ Apart from Vivado, students are **requested** to have the following programs ins
 
 For Windows:
 
-* **Notepad++** - text editor
-* **Nano**      - command line text editor
-* **7-Zip**     - archive utility to extract `.tar.gz` files under Windows
-* **Clink**     - Linux-like TAB completion for the Windows _Command Prompt_
-* **GNU Win**   - basic Bash and Linux shell executables for Windows
-* **Tcl/Tk**    - Tcl shell
-* **Git**       - versioning tool
-* **PuTTY**     - terminal emulator to work with serial communication
+* **Notepad++**  - text editor
+* **Nano**       - command line text editor
+* **7-Zip**      - archive utility to extract `.tar.gz` files under Windows
+* **Clink**      - Linux-like TAB completion for the Windows _Command Prompt_
+* **GNU Win**    - basic Bash and Linux shell executables for Windows
+* **Tcl/Tk**     - Tcl shell
+* **Git**        - versioning tool
+* **PuTTY**      - terminal emulator to work with serial communication
+* **ROOT**       - the ROOT data analysis framework by CERN
+* **Python**     - required to load ROOT libraries into Python (PyROOT)
 
 <br />
 
@@ -118,21 +125,11 @@ For Linux:
 * **Tcl/Tk**    - Tcl shell
 * **Git**       - versioning tool
 * **PuTTY**     - terminal emulator to work with serial communication
+* **ROOT**      - the ROOT data analysis framework by CERN
+* **Python**    - required to load ROOT libraries into Python (PyROOT)
 
 
 All required installation instructions are provided in the text.
-
->
-> **IMPORTANT !**
->
-> Despite both Windows 10 and Windows 11 come with the so called **Windows Subsystem for Linux (WSL)** layer that allows to natively run
-> Linux binary executables on Windows, providing also a Bash shell and all basic commands used in the course, the usage of WSL is not
-> supported for this course. Students working on Windows have to download and install Xilinx Vivado for Windows and to setup
-> a Linux-like command-line environment as described in this guide.
-> 
-> Beside this, WSL/WSL2 are Windows 10/11 only features, thus in order to support also students still working on a Windows 7
-> system installing Xilinx Vivado using WSL/WSL2 is not supported.
->
 
 <br />
 <!--------------------------------------------------------------------->
@@ -200,7 +197,7 @@ See also:
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > For students using Windows it is **highly recommended to create a shortcut** to the Windows terminal and
 > to **place it on the desktop** for easier and faster access during lectures.
@@ -234,7 +231,7 @@ Familiarity with a good **text editor** for coding is therefore assumed for the 
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > The source code will be always in form of **plain-text** files. That is, you need a **text editor** application
 > to open, write and edit them, **NOT  a word processor** application with text formatting capabilities!
@@ -291,7 +288,8 @@ command line text editors also under Windows.
 
 <hr>
 
-**Students working with a Linux system can skip the following details and jump to the [Install Git](#install-git) section.**
+**Students working with a Linux system can skip the following details and jump to the
+[Install Nano and Vim command-line text editors](#install-nano-and-vim-command-line-text-editors) section.**
 
 <hr>
 
@@ -308,7 +306,7 @@ and improving the _Command Prompt_ environment for an effective usage.
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > The usual software installation procedure under Windows is to download some **automated installer** (either `.exe` or `.msi` file) for the
 > application and then to launch **with administrator privileges** a guided **installation wizard** with a double left-click on the executable.
@@ -350,7 +348,7 @@ file and perform a **non-administrator installation**.
 Alternatively a `.zip` file containing both 32- and 64-bit versions of the tool has been **already prepared for you**
 and tested on both Windows 7 and Windows 10 systems:
 
-_<http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Notepad++.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Notepad++.zip>_
 
 Download and extract the `.zip` file in some meaningful place on your machine. Once the extraction process is completed
 you will find the `notepad++.exe` executable in `Notepad++\x86` and `Notepad++\x86_64` directories.
@@ -665,7 +663,7 @@ have already installed it without redirecting the output of the command to `nul`
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > Do not forget to **always SAVE** the `login.bat` file after **modifications** in order to later load new customizations in the _Command Prompt_ !
 >
@@ -796,7 +794,7 @@ to the Windows command line.
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > Windows 10 comes with the so called **Windows Subsystem for Linux (WSL)** layer that allows to natively run
 > Linux binary executables on Windows, providing also a Bash shell and all basic commands used in the course. <br />
@@ -844,7 +842,7 @@ For this course we will use the **GNU Win** package. Despite you can download an
 install the package from the official website it is **highly recommended**
 to download the following `.zip` file **already prepared for you**:
 
-_<http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/GnuWin.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/GnuWin.zip>_
 
 The main reason for this is that the proposed `.zip` file contains fully verified executables on both
 Windows 7 and Windows 10 systems. Some commands from other installations showed in the past different behaviours
@@ -943,7 +941,7 @@ Try the following commands to check that the new environment is properly configu
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > The `cd` command is a **built-in command** part of the shell program itself, not a standalone executable!
 > That is, there is no `cd.exe` executable as part of the GNU Win package:
@@ -1004,10 +1002,10 @@ at the top of the Git repository.
 
 <br />
 
-## Install Nano and Vim command-line text editors
+# Install Nano and Vim command-line text editors
 [**[Contents]**](#contents)
 
-Notepad++ is an excellent text-editor for programming under Windows. However there are several
+Notepad++ and Gedit are excellent text-editors for programming under Windows and Linux respectively. However there are several
 situations for which the usage of a **command line text editor** is simply faster and more efficient. <br />
 As an example, if you want to make small changes to some HDL source file while working in the
 terminal it might be faster to open the file in the terminal itself, make the modifications
@@ -1019,11 +1017,8 @@ Command line text editors are also extensively used in the **professional ASIC a
 thus it is highly recommended for students to learn how to use **at least one popular Linux command line text editor**
 between `nano` and `vim`. <br />
 Windows users have to install them as additional software components and then
-**update the system search path** in order to be able to invoke the executable from the terminal.
-
-
-### Install Nano
-[**[Contents]**](#contents)
+**update the system search path** in order to be able to invoke the executable from the terminal. Linux users might have these
+utilities already pre-installed but most recent Linux distributions come without them by default.
 
 [GNU Nano](https://en.wikipedia.org/wiki/GNU_nano) is a free and open-source command line text editor part of the GNU Project.
 It is **much much easier to learn and to use** with respect to Vim, thus this is the **recommended command line text editor** to start
@@ -1032,6 +1027,44 @@ with for non experienced users.
 Sources, documentation and HowTo's are available starting from the project official page at:
 
 _<https://www.nano-editor.org>_
+
+Beside Nano, [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor)) is the second most widespread command-line text-editor
+on Linux systems. In the software programming community it is considered one of the **most powerful and efficient**
+text editors for coding. However it is certainly **more difficult and hard to learn** for non experienced users with respect to Nano.
+
+<br />
+
+## <a name="install-nano-and-vim-linux-installation"></a>Linux installation
+[**[Contents]**](#contents)
+
+Usually in most recent Linux distributions neither `nano` nor `vim` executables are pre-installed by default.
+In order to verify if you already have these command-line text editors in your search path **open a terminal** and type:
+
+```
+% which nano
+% which vim
+```
+
+If already installed the outputs of the above commands should be `/usr/bin/nano` or `/usr/bin/vim`.
+In case these packages are not installed on your Linux system, use
+
+```
+% sudo yum install nano vim
+```
+
+or
+
+```
+% sudo apt-get install nano vim
+```
+
+according to the package manager of the Linux distribution you are working with.
+
+<br />
+
+
+## <a name="install-nano-and-vim-windows-installation"></a>Windows installation
+[**[Contents]**](#contents)
 
 To install Nano on Windows you can simply download **pre-compiled binaries** from the project official download area,
 
@@ -1058,7 +1091,7 @@ A few short tutorials can be also found at:
 Moreover a `.zip` file containing both 32- and 64-bit versions of the tool has been **already prepared for you** and tested
 on both Windows 7 and Windows 10 systems:
 
-_<http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Nano.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Nano.zip>_
 
 Download and extract the `.zip` file in some meaningful place on your machine. Once the extraction process is completed
 you will find the `nano.exe` executable in `Nano\x86\bin` and `Nano\x86_64\bin` directories.
@@ -1076,6 +1109,7 @@ Please **add and customize** the following code to the `login.bat` using Notepad
 :: add Nano executable to search path
 set PATH=\path\to\Nano\<architecture>\bin;%PATH%
 ```
+
 
 <br />
 
@@ -1148,23 +1182,14 @@ Here a few examples:
 
 <br />
 
-### Install Vim (optional)
-[**[Contents]**](#contents)
-
-Beside Nano, [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor)) is the second most widespread command-line text-editor
-on Linux systems. In the software programming community it is considered one of the **most powerful and efficient**
-text editors for coding. However it is certainly **more difficult and hard to learn** for non experienced users with respect to Nano. The
-installation of Vim under Windows is therefore left **optional** for the student, despite it might be useful to learn how to use `vim`
-for your future research work.
-
-Vim is free and open-source. Similar to Nano, you can install **pre-compiled binaries** for Windows downloading
+Similar to Nano, you can also install **Vim pre-compiled binaries** for Windows downloading
 the automated installer from the official website:
 
 _<https://www.vim.org/download.php>_
 
 Alternatively also for Vim a `.zip` has been already prepared for you and tested on both Windows 7 and Windows 10 systems:
 
-_<http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Vim.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Vim.zip>_
 
 Either if you install Vim using the official installer or if you decide to simply extract the `.zip` file
 then you have to **update the search path** in `login.bat` to include in the `PATH` environment variable also
@@ -1282,7 +1307,7 @@ _<https://phoenixnap.com/kb/how-to-install-git-windows>_
 Alternatively a `.zip` file containing both 32- and 64-bit executables (approx. 50 MB) has been **already prepared for you** and tested
 on both Windows 7 and Windows 10 systems,
 
-_<http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/MinGit.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/MinGit.zip>_
 
 simply download and extract the file in some meaningful place on your machine.
 Once the extraction process is completed you will find the `git.exe` executable in `MinGit\x86\cmd` and `MinGit\x86_64\cmd` directories.
@@ -1365,6 +1390,7 @@ Before starting to use `git` you are requested to do some **initial configuratio
 ```
 % git config --global user.name "Your Name"
 % git config --global user.email your.email@example.com
+% git config --global pull.rebase false
 ```
 
 These settings are internal to Git and local to your machine. For the email address you can use
@@ -1383,32 +1409,68 @@ In order to **download the repository** for the first time use:
 
 ```
 % cd Desktop
-% git clone https://github.com/lpacher/fphd.git [optional target directory]
+% git clone https://github.com/lpacher/lae.git [optional target directory]
 ```
 
-By default a new `fphd/` directory containing the repository will be created
+<br />
+
+>
+> **IMPORTANT**
+>
+> All cut-and-paste instructions in `README` files assume that you clone the repository as `lae` on your Desktop.
+> If you decide to clone the repository **either with a different name or into a different location** it will be up to you
+> to properly change the path to the repository wherever required.
+> Please, also keep in mind that all `git` commands **must be invoked** inside the top `lae/` directory or
+> from any other sub-directory of the repository!
+
+<br />
+
+By default a new `lae/` directory containing the repository will be created
 where you invoked the above `git` command, unless you specify a different target directory as optional parameter.
 
 Feel free to use a different target directory. As an example:
 
 ```
 % cd Desktop/Documents
-% git clone https://github.com/lpacher/fphd.git FPGA
+% git clone https://github.com/lpacher/lae.git LAE
 ```
 
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
-> All cut-and-paste instructions in `README` files assume that you clone the repository as `fphd` on your Desktop.
-> If you decide to clone the repository **either with a different name or into a different location** it will be up to you
-> to properly change the path to the repository wherever required.
-> Please, also keep in mind that all `git` commands **must be invoked** inside the top `fphd/` directory or
-> from any other sub-directory of the repository!
+> For Windows users. Starting from Windows 10 all personal documents and stuff can be accessed
+> using the **Microsoft OneDrive cloud storage**. This is also true for folders and documents
+> placed on the main "desktop". As a result the actual absolute path that locates the `Desktop`
+> directory is not `C:\Users\username\Desktop` but `C:\Users\username\OneDrive\Desktop`.
+>
+> Please, be aware that if you type
+>
+> ```
+> % cd C:\Users\username\Desktop
+> % ls
+> ```
+>
+> <br />
+>
+> into your Windows _Command Prompt_ and you don't see the content placed on you actual "desktop"
+> this is due to the fact that OneDrive is used (this is the default behaviour).
+>
+> If this is the case in order to access the real "desktop" you have to use: 
+>
+> ```
+> cd C:\Users\username\OneDrive\Desktop
+> ```
+>
+> <br />
+>
+> If you don't use OneDrive you can also move your Desktop outside OneDrive. See also:
+>
+> _<https://www.addictivetips.com/windows-tips/move-the-desktop-folder-out-of-onedrive-on-windows-10>_
+>
 
 <br />
-
 
 ## Create your personal development branch
 [**[Contents]**](#contents)
@@ -1513,7 +1575,7 @@ _<http://prdownloads.sourceforge.net/wintcltk/WinTclTk-8.5.6.exe>_
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > At the end of the automated installation process the **name of the executable** that comes with the above installer is **NOT** `tclsh.exe`
 > but `tclsh85.exe` tracing the version number in the name!
@@ -1537,7 +1599,7 @@ _<http://prdownloads.sourceforge.net/wintcltk/WinTclTk-8.5.6.exe>_
 If you prefer a **non-administrator installation** instead a portable `.zip` file has been
 **already prepared for you** and is available at:
 
-_<http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/WinTclTk.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/WinTclTk.zip>_
 
 
 <br />
@@ -1631,6 +1693,18 @@ tclsh$ exit
 <!--------------------------------------------------------------------->
 
 
+# Install ROOT and PyROOT
+[**[Contents]**](#contents)
+
+The free and open-source **ROOT package by CERN** will be used for data analysis in this course.
+For all installation details please refer to the following README page:
+
+_<https://github.com/lpacher/lae/tree/master/sample/ROOT/README.md>_
+
+<br />
+<!--------------------------------------------------------------------->
+
+
 # Install PuTTY
 [**[Contents]**](#contents)
 
@@ -1706,7 +1780,7 @@ file and perform a **non-administrator installation**.
 
 A `.zip` file containing all PuTTY utilities has been **already prepared for you** and is available at:
 
-_<http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/PuTTY.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/PuTTY.zip>_
 
 Download and extract the file in some meaningful place on your machine. Once the extraction process is completed you will
 find the `putty.exe` executable in the `PuTTY` directory, along with additional command line utilities such as `pscp.exe` and `psftp.exe`
@@ -1774,9 +1848,12 @@ using either `where` or `which` commands:
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
-> The software **version** used by the instructor during remote lectures will be **2019.2** !
+> The software **version** used by the instructor during remote lectures will be **2019.2**
+> and screenshots referring to Xilinx Vivado installation steps are from the **2019.2 installer**.
+> The content of the wizard for another version available for download on the Xilinx website
+> can be slightly different.
 >
 
 <br />
@@ -1788,39 +1865,49 @@ Xilinx softwares can be downloaded free of charge from the official Xilinx websi
 
 _<https://www.xilinx.com/support/download.html>_
 
-The package to be downloaded is called **Vivado Design Suite - HLx Editions**. As already mentioned the software is
-available **_only_ for Linux and Windows operating systems**. Both Windows 7 and Windows 10 are supported.
+<br />
+
 In order to download the software and to obtain a free license you must **register and create an account** on the Xilinx website.
 
-At the time of writing the latest version of the software available on the site is **2020.2**.
-The version used during lectures will be **2019.2**. Other versions can be downloaded from:
+At the time of writing the latest version of the software available on the site is **2023.2**. Older versions
+can be downloaded from:
 
 _<https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html>_
 
 <br />
 
+Unless special requirements in your research work (e.g. backward compatibility with some old FPGA board) it is always
+recommended to install and use the **latest available version of the software** but if you already installed Xilinx Vivado
+in the past **any older version of the tool will be fine for the course**. The version used during lectures will be **2019.2**.
+
+Starting from version 2021.2 the package to be downloaded is called **Vivado ML Edition**. For older versions
+of the tool the name of the package was  **Vivado Design Suite - HLx Editions** instead. 
+
+As already mentioned the software is available **_only_ for Linux and Windows operating systems**.
+Both Windows 7 and Windows 10 as well as the new Windows 11 are supported.
+
+<br />
+
 >
-> **NOTE**
+> **IMPORTANT**
 >
-> Screenshots referring Xilinx Vivado installation steps are from the **2019.2** installer.
-> The content of the wizard for another version available for download on the Xilinx website can be slightly different.
+> Windows 11 is only supported starting from version **2022.2** !
+> 
+> _<https://support.xilinx.com/s/question/0D54U00005ZMhHxSAL/does-windows-11-support-vivado-software?language=en_US>_
 >
 
 <br />
 
-Unless special requirements in your research work (e.g. backward compatibility
-with some old FPGA board) it is always recommended to install and use the latest available version of the software,
-but if you already installed Xilinx Vivado in the past **any older version of the tool will be fine for the course**.
-It is also recommended to download the file called **Vivado HLx _\<version\>_: All OS installer Single-File Download**.
-In fact many times splitted downloads or downloads using the _Self Extracting Web Installer_ option just gave troubles.
+It is recommended to prefer a **single-file download** (largest file in the list) with respect to a _Self Extracting Web Installer_
+(smaller file). In fact many times splitted downloads or downloads using the _Self Extracting Web Installer_ option just gave troubles.
 
-Please, be aware that **the size of file to be downloaded is EXTREMELY HUGE** (approx. 35 GB) due to the increasing
+Please, be aware that **the size of file to be downloaded is EXTREMELY HUGE** (several tens of GB) due to the increasing
 support for new complex devices. Indeed, the final installation will consume less disk space.
 
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > If you have **space issues on your disk** you can install an older version of the tool.
 > As an example, the size of the installer for the **2015.4** version was about 10 GB.
@@ -1868,7 +1955,7 @@ the _Extract Here_ option under the 7-Zip sub-menu.
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > Do not forget to **DELETE all compressed files and the extracted directory**
 > at the end of the installation process in order to **recover several GB of disk space**!
@@ -1948,7 +2035,7 @@ all **SoC**  and **UltraScale** devices, leaving the check only on the **7-Serie
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > In order to be able to **connect your PC to a real FPGA board** in the lab to install programming files
 > be sure that the **_Install Cable Drivers_** option is selected in the wizard!
@@ -1979,7 +2066,7 @@ if available (e.g. `D:\Xilinx`) without cluttering the system partition `C:\` wi
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > Later in this guide we will assume that a `XILINX_DIR` **environment variable** will be used to locate
 > the **main installation directory** as specified in the wizard during the installation setup.
@@ -2078,7 +2165,7 @@ https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug973-vivad
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > The following instructions are provided **only for reference**, you will check your actual cable drivers installation in the lab.
 > However **you MUST have cable drivers installed** on your machine in order to be able to physically connect your PC 
@@ -2442,7 +2529,7 @@ as used through the course. Additional debug features are also part of the imple
 To run the test flows, **open a terminal** window and change into the `fpga/test/` directory from the top of the Git repository:
 
 ```
-% cd Desktop/fphd/fpga/test
+% cd Desktop/lae/fpga/test
 ```
 
 List content of the directory:
@@ -2466,7 +2553,7 @@ List all available `Makefile` targets with:
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > Each target in the `Makefile` is actually executed invoking a `bash` shell. Windows users might notice that
 > a strange warning is generated when executing `make` targets:
@@ -2550,6 +2637,7 @@ Compile and elaborate the example HDL design and run the resulting simulation ex
 % make elaborate
 % make simulate
 ```
+
 <br />
 
 >
@@ -2697,7 +2785,7 @@ program the FPGA or to write the firmware into the external 128-MB Quad SPI Flas
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > The following instructions are provided **only for reference**, you can test firmware installation flows
 > only if you have a Digilent Arty A7 board attached to your personal computer!
@@ -2729,3 +2817,4 @@ In order to get the FPGA automatically programmed at power up you have to write 
 Please note that the firmware installation is a typical example of a very **automated and repetitive flow**, thus
 working in **batch mode** with a **command-line approach** becomes more efficient than opening a graphical interface.
 
+</div>
