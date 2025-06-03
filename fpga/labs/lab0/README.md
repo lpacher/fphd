@@ -1409,7 +1409,7 @@ In order to **download the repository** for the first time use:
 
 ```
 % cd Desktop
-% git clone https://github.com/lpacher/lae.git [optional target directory]
+% git clone https://github.com/lpacher/fphd.git [optional target directory]
 ```
 
 <br />
@@ -1417,22 +1417,22 @@ In order to **download the repository** for the first time use:
 >
 > **IMPORTANT**
 >
-> All cut-and-paste instructions in `README` files assume that you clone the repository as `lae` on your Desktop.
+> All cut-and-paste instructions in `README` files assume that you clone the repository as `fphd` on your Desktop.
 > If you decide to clone the repository **either with a different name or into a different location** it will be up to you
 > to properly change the path to the repository wherever required.
-> Please, also keep in mind that all `git` commands **must be invoked** inside the top `lae/` directory or
+> Please, also keep in mind that all `git` commands **must be invoked** inside the top `fphd/` directory or
 > from any other sub-directory of the repository!
 
 <br />
 
-By default a new `lae/` directory containing the repository will be created
+By default a new `fphd/` directory containing the repository will be created
 where you invoked the above `git` command, unless you specify a different target directory as optional parameter.
 
 Feel free to use a different target directory. As an example:
 
 ```
 % cd Desktop/Documents
-% git clone https://github.com/lpacher/lae.git LAE
+% git clone https://github.com/lpacher/fphd.git PHD_FPGA_COURSE
 ```
 
 <br />
@@ -1699,7 +1699,7 @@ tclsh$ exit
 The free and open-source **ROOT package by CERN** will be used for data analysis in this course.
 For all installation details please refer to the following README page:
 
-_<https://github.com/lpacher/lae/tree/master/sample/ROOT/README.md>_
+_<https://github.com/lpacher/fphd/tree/master/sample/ROOT/README.md>_
 
 <br />
 <!--------------------------------------------------------------------->
@@ -2529,7 +2529,7 @@ as used through the course. Additional debug features are also part of the imple
 To run the test flows, **open a terminal** window and change into the `fpga/test/` directory from the top of the Git repository:
 
 ```
-% cd Desktop/lae/fpga/test
+% cd Desktop/fphd/fpga/test
 ```
 
 List content of the directory:

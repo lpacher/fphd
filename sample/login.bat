@@ -118,6 +118,17 @@ set PATH=\where\you\installed\WinTclTk\bin;%PATH%
 set PATH=C:\where\you\installed\PuTTY;%PATH%
 
 
+::----------------------------------------
+::   Evince PDF viewer setup (optional)
+::----------------------------------------
+
+:: add Evince executable to search path
+set PATH=C:\where\you\installed\Evince;%PATH%
+
+:: redirect garbage 'No display font' errors to NUL (but DosKey ignores the usual > redirection character, needs the $G special character for this)
+doskey evince=evince.exe $* $G nul
+
+
 ::-------------------------
 ::   Xilinx Vivado setup
 ::-------------------------
